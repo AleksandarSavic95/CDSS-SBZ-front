@@ -1,1 +1,28 @@
-<h2 *ngIf="user !== ''" style="text-align: center;">{{user}}</h2>
+<div class="container">
+
+    <div *ngIf="doctor">
+        <h2>Doctor</h2>
+        <h3>You can:</h3>
+        <div class="row" *ngFor="let functionality of functionalities">
+            <div class="offset-1 col-sm-6">
+                <h5>{{functionality}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="admin">
+        <h2>Admin</h2>
+        <h3>You can:</h3>
+        <div class="row" *ngFor="let functionality of functionalities">
+            <div class="offset-1 col-sm-6">
+                <h5>{{functionality}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="noUser">
+        <h2>No user is logged in.</h2>
+        <h2><a [routerLink]="['/login']">Login</a></h2>
+    </div>
+
+</div>

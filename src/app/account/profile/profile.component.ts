@@ -8,16 +8,30 @@ import { PrincipalService } from '../../auth/principal.service';
 })
 export class ProfileComponent implements OnInit {
 
-  user = '';
+  admin = false;
+  doctor = false;
+  noUser = true;
+  functionalities = [];
 
   constructor(private principalService: PrincipalService) {
   }
 
   ngOnInit() {
     if (this.principalService.isAdmin()) {
-      this.user += 'Logged in as: Admin';
-    } else {
-      this.user += 'Logged in as: Doctor';
+      this.noUser = false;
+      this.admin = true;
+      this.functionalities = [
+        'Add doctors to the system', 'Add and view ingredients', 'Add and view symptoms',
+        'Add and view diseases', 'Add and view medications'
+      ];
+    }
+    if (this.principalService.isDoctor()){
+      this.noUser = false;
+      this.doctor = true;
+      this.functionalities = [
+          'Add patients to the system', 'Create reports', 'Check patients',
+        'Add patients to monitoring', 'View ingredients, symptoms, medications and diseases'
+      ];
     }
   }
 

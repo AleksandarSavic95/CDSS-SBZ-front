@@ -30,33 +30,30 @@ const appRoutes: Routes = [
   { path: 'add-doctor', component: AddDoctorComponent },
   { path: 'add-ingredient', component: AddIngredientComponent },
   { path: 'add-medication', component: AddMedicineComponent },
-  { path: 'add-disease', component: AddSicknessComponent },
-  { path: 'add-symptom', component: AddSymptomComponent },
-  { path: 'add-patient', component: AddPatientComponent },
+  // { path: 'add-disease', component: AddSicknessComponent },
+  // { path: 'add-symptom', component: AddSymptomComponent },
+  // { path: 'add-patient', component: AddPatientComponent },
 
   // Diagnose Components
-  { path: 'diagnose-patient', component: DiagnoseComponent },
-  { path: 'diagnose-most-probable', component: DiagnoseMostProbableComponent },
-  { path: 'diagnose-all-related', component: DiagnoseAllRelatedComponent },
-  { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
-  // {
-  //   path: 'doctors', component: ViewDoctorsComponent
-  // },
+  // { path: 'diagnose-patient', component: DiagnoseComponent },
+  // { path: 'diagnose-most-probable', component: DiagnoseMostProbableComponent },
+  // { path: 'diagnose-all-related', component: DiagnoseAllRelatedComponent },
+  // { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
 
   // Treatment
-  { path: 'treatment', component: TreatmentComponent },
+  // { path: 'treatment', component: TreatmentComponent },
 
   // View Components
-  { path: 'ingredients', component: ViewIngredientsComponent },
-  { path: 'medications', component: ViewMedicinesComponent },
-  { path: 'diseases', component: ViewSicknessesComponent },
-  { path: 'symptoms', component: ViewSymptomsComponent },
+  // { path: 'ingredients', component: ViewIngredientsComponent },
+  // { path: 'medications', component: ViewMedicinesComponent },
+  // { path: 'diseases', component: ViewSicknessesComponent },
+  // { path: 'symptoms', component: ViewSymptomsComponent },
 
   // Intensive care
-  { path: 'intensive-care', component: IntensiveCareComponent },
+  // { path: 'intensive-care', component: IntensiveCareComponent },
 
   // Reports
-  { path: 'reports', component: ReportsComponent },
+  // { path: 'reports', component: ReportsComponent },
 
   // Home
   { path: '', component: ProfileComponent },
