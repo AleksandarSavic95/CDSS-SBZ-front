@@ -14,6 +14,7 @@ import { ViewMedicinesComponent } from '../shared/view-medicines/view-medicines.
 import { ViewSicknessesComponent } from '../shared/view-sicknesses/view-sicknesses.component';
 import { AddPatientComponent } from '../doctor/add-patient/add-patient.component';
 import { ReportsComponent } from '../doctor/reports/reports.component';
+import { IntensiveCareComponent } from '../doctor/intensive-care/intensive-care.component';
 
 
 const appRoutes: Routes = [
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
   { path: 'symptoms', component: ViewSymptomsComponent },
 
   // Intensive care
-  // { path: 'intensive-care', component: IntensiveCareComponent },
+  { path: 'intensive-care', component: IntensiveCareComponent },
 
   // Reports
   { path: 'reports', component: ReportsComponent },

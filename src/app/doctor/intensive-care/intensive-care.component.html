@@ -1,0 +1,133 @@
+<div id="main-container">
+
+  <h1 class="centered-text">Intensive care</h1>
+
+  <h3 *ngIf="errorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{errorMessage}}</h3>
+
+  <div class="row">
+
+    <!-- All patients -->
+    <div class="col-sm-12">
+      <h3 *ngIf="patients?.length > 0" class="container">
+        <span class="centered-text">
+          <span class="color-opacity-radius" style="margin-top: 0;"> <b>All Patients:</b> </span>
+        </span>
+      </h3>
+
+      <div *ngIf=" ! loading && patients?.length > 0" class="scrollable-div">
+        <div class="col-sm-11 color-opacity-radius">
+          <table class="table table-hover table-condensed symptoms-table">
+            <thead>
+            <tr>
+              <th style="border: none;">Card ID</th>
+              <th style="border: none;">Full name</th>
+              <th style="border: none;">&nbsp;Add</th>
+              <th style="border: none;">&nbsp;Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let patient of patients">
+              <td><span>{{patient.medicalCardNumber}}</span></td>
+              <td><span>{{patient.name}}</span></td>
+              <td><button (click)="chooseSickness(patient)" class="btn btn-sm btn-success"> Intensive Care </button></td>
+              <td><button (click)="deletePatient(patient)" class="btn btn-sm btn-danger"> Remove </button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Intensive care patients -->
+    <div class="col-sm-12">
+      <h3 *ngIf="intensiveCarePatients?.length > 0">
+        <span class="centered-text">
+          <span class="color-opacity-radius" style="margin-top: 0;"> <b>On intensive care:</b> </span>
+        </span>
+      </h3>
+      <h3 *ngIf="intensiveCarePatients == undefined || intensiveCarePatients?.length == 0" class="container">
+        <span class="centered-text">
+          <span class="color-opacity-radius" style="margin-top: 0;"> <b>No patients on intensive care.</b> </span>
+        </span>
+      </h3>
+
+      <div *ngIf=" ! loading && intensiveCarePatients?.length > 0" class="scrollable-div">
+        <div class="col-sm-11 color-opacity-radius">
+          <table class="table table-hover table-condensed symptoms-table">
+            <thead>
+            <tr>
+              <th style="border: none;">Card ID</th>
+              <th style="border: none;">Full name</th>
+              <th style="border: none;">Disease</th>
+              <th style="border: none;">&nbsp;Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let intensiveCarePatient of intensiveCarePatients">
+              <td><span>{{intensiveCarePatient.patient?.medicalCardNumber}}</span></td>
+              <td><span>{{intensiveCarePatient.patient?.name}}</span></td>
+              <td><span>{{intensiveCarePatient.sickness?.name}}</span></td>
+              <td><button (click)="removeFromCare(intensiveCarePatient)" class="btn btn-sm btn-danger"> Remove </button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="loading" class="col-sm-6">
+    <div class="col-sm-offset-5 col-sm-4 loader"></div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="container">
+  <div class="modal" id="myModal" style="display: block; background: rgba(0,0,0, 0.5);" *ngIf="show">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">You are sending {{modalPatient.name}} to intensive care.</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="offset-1 col-sm-10">
+              <h4 *ngIf="modalErrorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{modalErrorMessage}}</h4>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6">
+              <h5>Sickness requiring intensive care:</h5>
+            </div>
+            <div *ngIf="modalPatient.sickFrom.length > 0" class="col-sm-6">
+              <select id="group"
+                      [(ngModel)]="chosenSicknessIndex"
+                      class="form-control"
+                      placeholder="Sickness Group">
+                <option value="default-selected-value"></option>
+                <option *ngFor="let sickness of modalPatient.sickFrom, index as i" value="{{i}}">{{sickness.name}}</option>
+              </select>
+            </div>
+            <div *ngIf="modalPatient.sickFrom.length == 0" class="col-sm-6">
+              <h5>This patient is not sick.</h5>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin: 5px; padding: 5px; border-radius: 5px;">
+          <div class="row">
+            <div class="offset-7 col-sm-2"> <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addToCare()"> Add </button> </div>
+            <div class="col-sm-2"> <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()"> Close </button> </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

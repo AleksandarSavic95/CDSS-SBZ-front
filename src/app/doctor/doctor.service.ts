@@ -9,6 +9,7 @@ export class DoctorService {
   constructor(private http: HttpClient) { }
 
   LOADED_PATIENT: any;
+  SICKNESS: any;
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred - Admin Service', error);
