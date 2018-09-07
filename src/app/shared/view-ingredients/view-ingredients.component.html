@@ -6,7 +6,7 @@
         <span class="col-lg-4 centered-text"><span class="color-opacity-radius" style="margin-top: 0;"> <b>Ingredients:</b> Page {{page + 1}} / {{totalPages}}</span></span>
       </div>
       <span class="col-lg-2 centered-text"><button *ngIf="page > 0" (click)="previousPage()" class="btn-default btn btn-md"> Previous page </button></span>
-      <span class="col-lg-2 centered-text"><button *ngIf="page == 0 || page < (totalPages - 1)" (click)="nextPage()" class="btn-default btn btn-md"> Next page </button></span>
+      <span class="col-lg-2 centered-text"><button *ngIf="page < (totalPages - 1)" (click)="nextPage()" class="btn-default btn btn-md"> Next page </button></span>
     </div>
     <div class="row">
       <div class="col-sm-offset-3 col-sm-6 color-opacity-radius" id="id-search-form">
