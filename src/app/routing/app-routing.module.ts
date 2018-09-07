@@ -12,6 +12,7 @@ import { ViewSymptomsComponent } from '../shared/view-symptoms/view-symptoms.com
 import { ProfileComponent } from '../account/profile/profile.component';
 import { ViewMedicinesComponent } from '../shared/view-medicines/view-medicines.component';
 import { ViewSicknessesComponent } from '../shared/view-sicknesses/view-sicknesses.component';
+import { AddPatientComponent } from '../doctor/add-patient/add-patient.component';
 
 
 const appRoutes: Routes = [
@@ -24,7 +25,7 @@ const appRoutes: Routes = [
   { path: 'add-medication', component: AddMedicineComponent },
   { path: 'add-disease', component: AddSicknessComponent },
   { path: 'add-symptom', component: AddSymptomComponent },
-  // { path: 'add-patient', component: AddPatientComponent },
+  { path: 'add-patient', component: AddPatientComponent },
 
   // Diagnose Components
   // { path: 'diagnose-patient', component: DiagnoseComponent },

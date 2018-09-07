@@ -9,6 +9,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
+import { DoctorModule } from './doctor/doctor.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AdminModule } from './admin/admin.module';
     AdminModule,
     AppRoutingModule,
     BrowserModule,
+    DoctorModule,
     NgbModule.forRoot(),
     RouterModule,
     SharedModule,
