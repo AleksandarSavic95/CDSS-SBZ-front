@@ -1,0 +1,47 @@
+<div class="container">
+
+  <h1>Add Ingredient</h1>
+
+  <div *ngIf="!loading" class="col-sm-4 offset-4">
+
+    <div class="alert alert-danger" *ngIf="errorMessage" style="padding: 10px;">
+      {{errorMessage}}
+    </div>
+    <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
+      {{message}}
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="addIngredient()">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"
+               id="name"
+               class="form-control"
+               formControlName="nameCtrl"
+               [formGroup]="form"
+               placeholder="Ingredient name">
+      </div>
+      <div *ngIf="form.controls['nameCtrl'].touched && !form.controls['nameCtrl'].valid">
+        <div class="alert alert-danger" *ngIf="form.controls['nameCtrl'].hasError('required')">
+          Name is required.
+        </div>
+        <div class="alert alert-danger" *ngIf="form.controls['nameCtrl'].hasError('minlength')">
+          Name must contain at least 3 characters.
+        </div>
+        <div class="alert alert-danger" *ngIf="form.controls['nameCtrl'].hasError('maxlength')">
+          Name must not contain more than 30 characters.
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-lg" type="submit" [disabled]='!form.valid'>Add Ingredient</button>
+
+    </form>
+
+  </div>
+
+  <div *ngIf="loading" class="container">
+    <div class="offset-5 col-lg-5 loader"></div>
+  </div>
+
+</div>

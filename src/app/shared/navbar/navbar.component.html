@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
+  <a class="navbar-brand" [routerLink]="['']">CDSS App</a>
+
+  <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button"><span class="navbar-toggler-icon"></span></button>
+  <div class="collapse navbar-collapse" [class.show]="show" id="navbarsDefault">
+    <ul class="navbar-nav mr-auto">
+      <!--<a class="nav-item nav-link" [routerLink]="['menu-link-1']" >Menu Item 1</a>-->
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id01"[routerLink]="[]" ngbDropdownToggle><i class="fas fa-vial fa-lg"></i> &nbsp; Ingredients</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLink]="['add-ingredient']">Add one</a>
+          <a class="dropdown-item" [routerLink]="['ingredients']">View all</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id02"[routerLink]="[]" ngbDropdownToggle><i class="fas fa-pills fa-lg"></i> &nbsp; Medicines</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLink]="['add-medicine']">Add one</a>
+          <a class="dropdown-item" [routerLink]="['medicines']">View all</a>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="isAdmin()">
+        <a class="nav-item nav-link" [routerLink]="['add-doctor']">
+          <i class="fas fa-plus"></i>&nbsp; Add Doctor
+        </a>
+      </li>
+      <li *ngIf="isDoctor()">
+        <a class="nav-item nav-link" [routerLink]="['add-patient']">
+          <i class="fas fa-plus"></i>&nbsp; Add Patient
+        </a>
+      </li>
+      <li>
+        <a class="nav-item nav-link" [routerLink]="['login']">
+          <i class="fas fa-power-off"></i> &nbsp;
+          <span *ngIf="isAuthenticated()">Logout</span>
+          <span *ngIf="!isAuthenticated()">Login</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!--<h2 *ngIf="isAdmin()">Admin - navbar.component.html</h2>-->
+<!--<h2 *ngIf="isDoctor()">Doctor - navbar.component.html</h2>-->
