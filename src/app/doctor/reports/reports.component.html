@@ -1,0 +1,93 @@
+<div>
+  <h1>Reports:</h1>
+
+  <div *ngIf=" ! loading">
+    <div class="row">
+      <div class="col-sm-4 centered-text">
+        <button class="btn btn-outline-primary btn-block" (click)="getChronicallyIllPatients()" style="margin-bottom: 5px;">
+          {{chronicText}}
+        </button>
+      </div>
+      <div class="col-sm-4 centered-text">
+        <button class="btn btn-outline-primary btn-block" (click)="getAddictedPatients()" style="margin-bottom: 5px;">
+          {{addictsText}}
+        </button>
+      </div>
+      <div class="col-sm-4 centered-text">
+        <button class="btn btn-outline-primary btn-block" (click)="getWeakImmuneSystemPatients()" style="margin-bottom: 5px;">
+          {{weakImmuneText}}
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <h2 *ngIf="chronic">{{chronicText}}</h2>
+      <h2 *ngIf="addict">{{addictsText}}</h2>
+      <h2 *ngIf="immune">{{weakImmuneText}}</h2>
+    </div>
+
+    <div *ngIf="chronicallyIllPatients?.length > 0" class="scrollable-div">
+
+      <div class="row">
+        <div class="col-sm-1">
+          <button disabled class="btn btn-block my-text-black">No.</button>
+        </div>
+        <div class="col-sm-4">
+          <button disabled class="btn btn-block my-text-black">Patient name</button>
+        </div>
+        <div class="col-sm-4">
+          <button disabled class="btn btn-block my-text-black">Sickness</button>
+        </div>
+      </div>
+
+      <hr style="margin-top: 5px;">
+
+      <div *ngFor="let patientWithSickness of chronicallyIllPatients, index as i" class="row">
+        <div class="col-sm-1">
+          <button disabled class="btn btn-block btn-outline-secondary">{{i + 1}}.</button>
+        </div>
+        <div class="col-sm-4">
+          <button disabled class="btn btn-block btn-outline-secondary">{{patientWithSickness.patient.name}}</button>
+        </div>
+        <div class="col-sm-4">
+          <button disabled class="btn btn-block btn-outline-secondary">{{patientWithSickness.sickness.name}}</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="patients?.length > 0" class="scrollable-div">
+
+      <div class="row">
+        <div class="col-sm-1">
+          <button disabled class="btn btn-block my-text-black">No.</button>
+        </div>
+        <div class="col-sm-6">
+          <button disabled class="btn btn-block my-text-black">Patient name</button>
+        </div>
+      </div>
+
+      <hr style="margin-top: 5px;">
+
+      <div *ngFor="let patient of patients, index as i" class="row">
+        <div class="col-sm-1">
+          <button disabled class="btn btn-block btn-outline-secondary">{{i + 1}}.</button>
+        </div>
+        <div class="col-sm-6">
+          <button disabled class="btn btn-block btn-outline-secondary">{{patient.name}}</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 *ngIf=" ! firstRerportsLoad && patients?.length == 0 && chronicallyIllPatients?.length == 0">
+      No patients in this report.
+    </h2>
+  </div>
+
+  <div *ngIf="loading" class="row">
+    <div class="offset-4 col-sm-6">
+      <div class="loader"></div>
+    </div>
+  </div>
+
+
+</div>

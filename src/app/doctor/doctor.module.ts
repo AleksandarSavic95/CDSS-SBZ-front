@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DoctorService } from './doctor.service';
 import { AddPatientComponent } from './add-patient/add-patient.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { AddPatientComponent } from './add-patient/add-patient.component';
     FormsModule,
     RouterModule
   ],
-  declarations: [AddPatientComponent],
+  declarations: [AddPatientComponent, ReportsComponent],
   providers: [DoctorService]
 })
 export class DoctorModule { }
