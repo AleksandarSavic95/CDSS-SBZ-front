@@ -30,8 +30,8 @@
         <tr *ngIf="isAdmin">
           <!--<div class="row">-->
             <th style="border: none;">Ingredient name</th>
-            <th style="border: none;"><i class="far fa-edit"></i>&nbsp;Edit</th>
-            <th style="border: none;"><i class="far fa-trash-alt"></i>&nbsp;Delete</th>
+            <th style="border: none;">&nbsp;Edit</th>
+            <th style="border: none;">&nbsp;Delete</th>
           <!--</div>-->
         </tr>
         <tr *ngIf=" ! isAdmin">
@@ -44,10 +44,10 @@
         <tr *ngFor="let ingredient of ingredients">
           <td><span>{{ingredient.name}}</span></td>
           <td *ngIf="isAdmin">
-            <button (click)="reveal(ingredient)" class="btn btn-sm btn-primary"> <i class="far fa-edit"></i> Edit </button>
+            <button (click)="reveal(ingredient)" class="btn btn-sm btn-primary"> Edit </button>
           </td>
           <td *ngIf="isAdmin">
-            <button (click)="deleteIngredient(ingredient)" class="btn btn-sm btn-danger"> <i class="far fa-trash-alt"></i> Remove </button>
+            <button (click)="deleteIngredient(ingredient)" class="btn btn-sm btn-danger"> Remove </button>
           </td>
         </tr>
         </tbody>

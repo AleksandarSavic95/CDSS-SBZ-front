@@ -1,0 +1,142 @@
+<div class="container" id="main-container">
+
+  <h3 *ngIf="medicines?.length > 0 || searched && medicines?.length == 0" class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="col-lg-4 centered-text"><span class="color-opacity-radius" style="margin-top: 0;"> <b>Medications:</b> Page {{page + 1}} / {{totalPages}}</span></span>
+      </div>
+      <span class="col-lg-2 centered-text"><button *ngIf="page > 0" (click)="previousPage()" class="btn-default btn btn-md"> Previous page </button></span>
+      <span class="col-lg-2 centered-text"><button *ngIf="page == 0 && page < (totalPages - 1)" (click)="nextPage()" class="btn-default btn btn-md"> Next page </button></span>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-6 color-opacity-radius" id="id-search-form">
+        <form (ngSubmit)="search()" style="padding: 5px;">
+          <input type="text" [(ngModel)]="searchCriteria" class="form-control mr-sm-2" id="id-searchCriteria" name="searchCriteria" placeholder="Search criteria">
+          <button class="btn btn-primary btn-md" type="submit" [disabled]='searchCriteria == "" || searchCriteria == undefined' style="margin-top: 5px;">Search</button>
+          <button class="btn btn-primary btn-md" type="button" [disabled]=' ! searched' (click)="getMedicines()" style="margin-top: 5px; float: right;">Browse medications</button>
+        </form>
+      </div>
+    </div>
+  </h3>
+
+  <h3 *ngIf="searched && medicines?.length == 0 && !loading" class="container color-opacity-radius centered-text">Your search gave no results</h3>
+
+  <h3 *ngIf="errorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{errorMessage}}</h3>
+
+  <div *ngIf=" ! loading && ! medicines?.length == 0">
+    <div class="col-sm-offset-1 col-sm-10 color-opacity-radius">
+      <table class="table table-hover table-condensed medicines-table">
+        <thead>
+        <tr *ngIf="isAdmin">
+          <!--<div class="row">-->
+          <th style="border: none;">Medication name</th>
+          <th style="border: none;">&nbsp;Edit</th>
+          <th style="border: none;">&nbsp;Delete</th>
+          <!--</div>-->
+        </tr>
+        <tr *ngIf=" ! isAdmin">
+          <div class="row">
+            <th class="col-sm-12" style="border: none;">Medicine name</th>
+          </div>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let medicine of medicines">
+          <td><span>{{medicine.name}}</span></td>
+          <td *ngIf="isAdmin">
+            <button (click)="reveal(medicine)" class="btn btn-sm btn-primary"> Edit </button>
+          </td>
+          <td *ngIf="isAdmin">
+            <button (click)="deleteMedicine(medicine)" class="btn btn-sm btn-danger"> Remove </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="container">
+    <div class="col-sm-offset-5 col-sm-4 loader"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="container">
+  <div class="modal" id="myModal" style="display: block; background: rgba(0,0,0, 0.5);" *ngIf="show">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">You are editing: {{modalMedicine.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-6"> <h5>New medicine name:</h5> </div>
+            <div class="col-sm-6"> <h5><input type="text" [(ngModel)]="newMedicine.name" class="form-control form-control-sm"></h5> </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6">
+              <h5>Medicine Type: (currently {{modalMedicine.type}})</h5>
+            </div>
+            <div class="col-sm-6">
+              <select id="type"
+                      [(ngModel)]="newMedicine.type"
+                      class="form-control"
+                      placeholder="Medicine Type">
+                <option value="default-selected-value"></option>
+                <option *ngFor="let type of medicineTypes">{{type}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <h5>Added ingredients <span style="font-size: 1rem;">(click to remove)</span> </h5>
+              <div *ngIf="addedIngredientsPage == 0" class="row">
+                <div class="col-sm-4">Page: {{addedIngredientsPage + 1}} / {{totalAddedIngredientsPages}}</div>
+                <div class="offset-4 col-sm-2" *ngIf="addedIngredientsPage >= 0 && addedIngredientsPage < (totalAddedIngredientsPages - 1)"> <button class="btn btn-sm" (click)="nextAddedIngredientsPage()">Next</button> </div>
+              </div>
+              <div *ngIf="addedIngredientsPage > 0" class="row">
+                <div class="col-sm-4">Page: {{addedIngredientsPage + 1}} / {{totalAddedIngredientsPages}}</div>
+                <div *ngIf="addedIngredientsPage > 0" class="col-sm-2"> <button class="btn btn-sm" (click)="previousAddedIngredientsPage()">Previous</button> </div>
+                <div class="offset-2 col-sm-2" *ngIf="addedIngredientsPage >= 0 && addedIngredientsPage < (totalAddedIngredientsPages - 1)"> <button class="btn btn-sm" (click)="nextAddedIngredientsPage()">Next</button> </div>
+              </div>
+              <div *ngFor="let ingredient of pagedAddedIngredients">
+                <button class="btn btn-outline-danger btn-block" value="addedIngredient" (click)="removeIngredient(ingredient)" style="margin-bottom: 5px;cursor: not-allowed;">
+                  {{ingredient.name}}
+                </button>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <h5>Add ingredients <span style="font-size: 1rem;">(click to add)</span> </h5>
+              <div *ngIf="newIngredientsPage == 0" class="row">
+                <div class="col-sm-4">Page: {{newIngredientsPage + 1}} / {{totalNewIngredientsPages}}</div>
+                <div class="offset-4 col-sm-2" *ngIf="newIngredientsPage >= 0 && newIngredientsPage < (totalNewIngredientsPages - 1)"> <button class="btn btn-sm" (click)="nextNewIngredientsPage()">Next</button> </div>
+              </div>
+              <div *ngIf="newIngredientsPage > 0" class="row">
+                <div class="col-sm-4">Page: {{newIngredientsPage + 1}} / {{totalNewIngredientsPages}}</div>
+                <div *ngIf="newIngredientsPage > 0" class="col-sm-2"> <button class="btn btn-sm" (click)="previousNewIngredientsPage()">Previous</button> </div>
+                <div class="offset-2 col-sm-2" *ngIf="newIngredientsPage == 0 || newIngredientsPage < (totalNewIngredientsPages - 1)"> <button class="btn btn-sm" (click)="nextNewIngredientsPage()">Next</button> </div>
+              </div>
+              <div *ngFor="let ingredient of newIngredients">
+                <button class="btn btn-outline-info btn-block" value="ingredient" (click)="addIngredient(ingredient)" style="margin-bottom: 5px; cursor: cell;">
+                  {{ingredient.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin: 5px; padding: 5px; border-radius: 5px;">
+          <div class="row">
+            <div class="offset-7 col-sm-2"> <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editMedicine()"> Edit </button> </div>
+            <div class="col-sm-2"> <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()"> Close </button> </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

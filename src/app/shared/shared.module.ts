@@ -7,6 +7,7 @@ import { AuthModule } from '../auth/auth.module';
 import { ViewIngredientsComponent } from './view-ingredients/view-ingredients.component';
 import { ViewSymptomsComponent } from './view-symptoms/view-symptoms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ViewMedicinesComponent } from './view-medicines/view-medicines.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent],
+  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent, ViewMedicinesComponent],
   exports: [NavbarComponent]
 })
 export class SharedModule { }
