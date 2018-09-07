@@ -12,6 +12,11 @@ export class NavbarComponent {
 
   show = false;
 
+  rightClick(event) {
+    console.log(event);
+    return false; // prevents default context menu
+  }
+
   toggleCollapse() {
     this.show = !this.show;
   }

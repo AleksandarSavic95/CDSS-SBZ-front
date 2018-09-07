@@ -1,40 +1,72 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-info fixed-top">
-  <a class="navbar-brand" [routerLink]="['']">CDSS App</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" [routerLink]="['']" (contextmenu)="rightClick($event)">Health Center</a>
 
   <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button"><span class="navbar-toggler-icon"></span></button>
   <div class="collapse navbar-collapse" [class.show]="show" id="navbarsDefault">
-    <ul class="navbar-nav mr-auto">
-      <!--<a class="nav-item nav-link" [routerLink]="['menu-link-1']" >Menu Item 1</a>-->
+
+    <!--  D O C T O R  M E N U  -->
+
+    <ul *ngIf="isDoctor()"class="navbar-nav mr-auto">
+      <li><a class="nav-item nav-link" [routerLink]="['add-patient']">Add patient</a></li>
+      <li><a class="nav-item nav-link" [routerLink]="['reports']">Generate reports</a></li>
+      <li><a class="nav-item nav-link" [routerLink]="['intensive-care']">Intensive Care</a></li>
+      <li><a class="nav-item nav-link" [routerLink]="['diagnose-patient']">Diagnose</a></li>
+    </ul>
+
+    <ul *ngIf="isDoctor()" class="nav navbar-nav navbar-right">
       <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="id01"[routerLink]="[]" ngbDropdownToggle><i class="fas fa-vial fa-lg"></i> &nbsp; Ingredients</a>
-        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-          <a class="dropdown-item" [routerLink]="['add-ingredient']">Add one</a>
-          <a class="dropdown-item" [routerLink]="['ingredients']">View all</a>
+        <a class="nav-link dropdown-toggle" id="id-doctor-view"[routerLink]="[]" ngbDropdownToggle> View </a>
+        <div class="dropdown-menu" aria-labelledby="id-doctor-view" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLink]="['ingredients']">Ingredients</a>
+          <a class="dropdown-item" [routerLink]="['medications']">Medications</a>
+          <a class="dropdown-item" [routerLink]="['symptoms']">Symptoms</a>
+          <a class="dropdown-item" [routerLink]="['diseases']">Diseases</a>
+        </div>
+      </li>
+      <li>
+        <a class="nav-item nav-link" [routerLink]="['login']">
+          &nbsp;&nbsp;
+          <span *ngIf="isAuthenticated()">Logout</span>
+          <span *ngIf="!isAuthenticated()">Login</span>
+        </a>
+      </li>
+    </ul>
+
+
+    <!--  A D M I N   M E N U  -->
+
+    <ul *ngIf="isAdmin()" class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id-admin-add"[routerLink]="[]" ngbDropdownToggle>
+          &nbsp; Add new &nbsp; </a>
+        <div class="dropdown-menu" aria-labelledby="id-admin-add" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLink]="['add-ingredient']">Ingredient</a>
+          <a class="dropdown-item" [routerLink]="['add-medication']">Medication</a>
+          <a class="dropdown-item" [routerLink]="['add-symptom']">Symptom</a>
+          <a class="dropdown-item" [routerLink]="['add-disease']">Disease</a>
         </div>
       </li>
       <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="id02"[routerLink]="[]" ngbDropdownToggle><i class="fas fa-pills fa-lg"></i> &nbsp; Medicines</a>
-        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-          <a class="dropdown-item" [routerLink]="['add-medicine']">Add one</a>
-          <a class="dropdown-item" [routerLink]="['medicines']">View all</a>
+        <a class="nav-link dropdown-toggle" id="id-admin-view"[routerLink]="[]" ngbDropdownToggle>
+          &nbsp; View all &nbsp; </a>
+        <div class="dropdown-menu" aria-labelledby="id-admin-view" ngbDropdownMenu>
+          <a class="dropdown-item" [routerLink]="['ingredients']">Ingredients</a>
+          <a class="dropdown-item" [routerLink]="['medications']">Medications</a>
+          <a class="dropdown-item" [routerLink]="['symptoms']">Symptoms</a>
+          <a class="dropdown-item" [routerLink]="['diseases']">Diseases</a>
         </div>
       </li>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li *ngIf="isAdmin()">
+    <ul *ngIf="isAdmin()" class="nav navbar-nav navbar-right">
+      <li>
         <a class="nav-item nav-link" [routerLink]="['add-doctor']">
-          <i class="fas fa-plus"></i>&nbsp; Add Doctor
-        </a>
-      </li>
-      <li *ngIf="isDoctor()">
-        <a class="nav-item nav-link" [routerLink]="['add-patient']">
-          <i class="fas fa-plus"></i>&nbsp; Add Patient
+          &nbsp; Add Doctor
         </a>
       </li>
       <li>
         <a class="nav-item nav-link" [routerLink]="['login']">
-          <i class="fas fa-power-off"></i> &nbsp;
+          &nbsp;
           <span *ngIf="isAuthenticated()">Logout</span>
           <span *ngIf="!isAuthenticated()">Login</span>
         </a>
@@ -42,6 +74,3 @@
     </ul>
   </div>
 </nav>
-
-<!--<h2 *ngIf="isAdmin()">Admin - navbar.component.html</h2>-->
-<!--<h2 *ngIf="isDoctor()">Doctor - navbar.component.html</h2>-->

@@ -20,7 +20,7 @@ export class AdminService {
       .pipe(
         map(resp => {
           console.log(resp);
-          return resp as Page;
+          return resp;
         }),
         catchError(this.handleError)
       );
