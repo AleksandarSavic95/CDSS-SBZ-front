@@ -30,8 +30,8 @@ const appRoutes: Routes = [
   { path: 'add-doctor', component: AddDoctorComponent },
   { path: 'add-ingredient', component: AddIngredientComponent },
   { path: 'add-medication', component: AddMedicineComponent },
-  // { path: 'add-disease', component: AddSicknessComponent },
-  // { path: 'add-symptom', component: AddSymptomComponent },
+  { path: 'add-disease', component: AddSicknessComponent },
+  { path: 'add-symptom', component: AddSymptomComponent },
   // { path: 'add-patient', component: AddPatientComponent },
 
   // Diagnose Components

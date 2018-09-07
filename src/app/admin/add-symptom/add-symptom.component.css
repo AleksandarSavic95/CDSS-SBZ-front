@@ -1,25 +1,5 @@
-.my-h1 {
-  font-size: 2.218124rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
-}
-
-.mar-top-10 {
-  margin-top: 10px;
-}
-
 h1 {
   text-align: center;
-}
-
-.centered-text {
-  text-align: center;
-}
-
-.color-opacity-radius {
-  background-color: rgba(253, 251, 255, 0.8); /*rgba(60,120,255, 0.3)*/
-  padding: 3px;
-  border-radius: 10px;
 }
 
 .loader {

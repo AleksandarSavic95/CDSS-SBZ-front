@@ -1,68 +1,51 @@
 <div>
 
-  <h1>Add medicine</h1>
+  <div class="row">
+    <div class="col-sm-3">
+      <span class="my-h1">New medication</span>
+    </div>
+    <div class="col-sm-3 mar-top-10">
+      <div [formGroup]="form" class="form-group">
+        <input type="text"
+               id="name"
+               class="form-control"
+               formControlName="nameCtrl"
+               [formGroup]="form"
+               placeholder="Medication Name">
+      </div>
+      <!--<input type="text" name="sickness-name" class="form-control" [(ngModel)]="name" placeholder="Sickness name">-->
+    </div>
+    <div class="col-sm-3 mar-top-10">
+      <div [formGroup]="form" class="form-group">
+        <select id="type"
+                class="form-control"
+                formControlName="typeCtrl"
+                [formGroup]="form">
+          <option value="not-selected-value"></option>
+          <option *ngFor="let type of medicineTypes">{{type}}</option>
+        </select>
+      </div>
+      <!--<select name="sickness-group" class="form-control" [(ngModel)]="group" placeholder="Sickness Group">-->
+      <!--<option *ngFor="let group of sicknessGroups, index as i" value="{{i + 1}}">{{group}}</option>-->
+      <!--</select>-->
+    </div>
+    <div class="col-sm-2 mar-top-10">
+      <button class="btn btn-primary" (click)="addMedicine()">Add medication</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="alert alert-danger" *ngIf="errorMessage" style="padding: 10px;">
+      {{errorMessage}}
+    </div>
+    <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
+      {{message}}
+    </div>
+  </div>
 
   <div *ngIf="!loading" class="row">
 
-    <div class="offset-1 col-sm-4">
-
-      <h2 style="text-align: center;">Name and type</h2>
-
-      <div class="col-sm-10 offset-1">
-
-        <div class="alert alert-danger" *ngIf="errorMessage" style="padding: 10px;">
-          {{errorMessage}}
-        </div>
-        <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
-          {{message}}
-        </div>
-
-        <form [formGroup]="form" (ngSubmit)="addMedicine()">
-
-          <div class="form-group">
-            <label for="name">Medicine Name</label>
-            <input type="text"
-                   id="name"
-                   class="form-control"
-                   formControlName="nameCtrl"
-                   [formGroup]="form"
-                   placeholder="Sinedol">
-          </div>
-          <div *ngIf="form.controls['nameCtrl'].touched && !form.controls['nameCtrl'].valid">
-            <div class="alert alert-danger" *ngIf="form.controls['nameCtrl'].hasError('required')">
-              Medicine name is required.
-            </div>
-            <div class="alert alert-danger" *ngIf="form.controls['nameCtrl'].hasError('minlength')">
-              Name must contain at least 3 characters.
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="type">Medicine Type</label>
-            <select id="type"
-                    class="form-control"
-                    formControlName="typeCtrl"
-                    [formGroup]="form"
-                    placeholder="Medicine Type">
-              <option value="not-selected-value"></option>
-              <option *ngFor="let type of medicineTypes">{{type}}</option>
-            </select>
-          </div>
-          <div *ngIf="form.controls['typeCtrl'].touched && !form.controls['typeCtrl'].valid">
-            <div class="alert alert-danger" *ngIf="form.controls['typeCtrl'].hasError('required')">
-              Medicine Type is required.
-            </div>
-          </div>
-
-          <button class="btn btn-primary btn-lg" type="submit" [disabled]='!form.valid'>Add doctor</button>
-
-        </form>
-
-      </div>
-
-    </div>
-
-    <div class="col-sm-6">
+    <div class="offset-2 col-sm-8">
 
       <h2 style="visibility: visible;">Ingredients</h2>
 
@@ -72,17 +55,17 @@
 
           <!-- Ingredients -->
           <h5 class="container">
-            <div class="centered-text"><h5 class="color-opacity-radius" style="margin-top: 0;"> Page {{page + 1}} of 3</h5></div>
+            <div class="centered-text"><h5 class="color-opacity-radius" style="margin-top: 0;"> Page {{page + 1}} / {{totalPages}}</h5></div>
             <div *ngIf="page == 0" class="row" style="margin-bottom: 5px;">
-              <div class="offset-7 col-sm-5 centered-text"><button *ngIf="page == 0 || page < 2" (click)="nextPage()" class="btn-default btn btn-md"> Next </button></div>
+              <div class="offset-7 col-sm-5 centered-text"><button *ngIf="page < (totalPages - 1)" (click)="nextPage()" class="btn-default btn btn-md"> Next </button></div>
             </div>
             <div *ngIf="page > 0" class="row" style="margin-bottom: 5px;">
               <div class="col-sm-6" centered-text><button *ngIf="page > 0" (click)="previousPage()" class="btn-default btn btn-md"> Previous </button></div>
-              <div class="offset-1 col-sm-5 centered-text"><button *ngIf="page == 0 || page < 2" (click)="nextPage()" class="btn-default btn btn-md"> Next </button></div>
+              <div class="offset-1 col-sm-5 centered-text"><button *ngIf="page == 0 || page < (totalPages - 1)" (click)="nextPage()" class="btn-default btn btn-md"> Next </button></div>
             </div>
           </h5>
 
-          <!-- Added ingredients -->
+          <!-- Ingredients -->
           <div class="form-group">
             <label for="ingredients" style="font-size: 20px; margin-bottom: 0px;">All:</label>&nbsp;<span>(click to add)</span>
             <!-- Filter Field -->
@@ -96,6 +79,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Added ingredients -->
         <div class="col-sm-6">
           <div class="form-group">
             <label for="added-ingredients" style="font-size: 20px; margin-bottom: 0px;">Added:</label>&nbsp;<span>(click to remove)</span>
