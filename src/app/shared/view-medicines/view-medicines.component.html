@@ -36,7 +36,7 @@
         </tr>
         <tr *ngIf=" ! isAdmin">
           <div class="row">
-            <th class="col-sm-12" style="border: none;">Medicine name</th>
+            <th class="col-sm-12" style="border: none;">Medication name</th>
           </div>
         </tr>
         </thead>
@@ -77,12 +77,12 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-6"> <h5>New medicine name:</h5> </div>
+            <div class="col-sm-6"> <h5>New medication name:</h5> </div>
             <div class="col-sm-6"> <h5><input type="text" [(ngModel)]="newMedicine.name" class="form-control form-control-sm"></h5> </div>
           </div>
           <div class="row form-group">
             <div class="col-sm-6">
-              <h5>Medicine Type: (currently {{modalMedicine.type}})</h5>
+              <h5>Medication Type: (currently {{modalMedicine.type}})</h5>
             </div>
             <div class="col-sm-6">
               <select id="type"
