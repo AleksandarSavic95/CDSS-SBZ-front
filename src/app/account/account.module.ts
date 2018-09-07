@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {AccountService} from './account.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, ProfileComponent],
   exports: [LoginComponent],
   providers: [
     AccountService,
