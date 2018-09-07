@@ -17,12 +17,16 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="alert alert-danger" *ngIf="errorMessage" style="padding: 10px;">
-      {{errorMessage}}
+  <div class="row" style="margin-top: 10px;">
+    <div class="offset-3 col-sm-6">
+      <div class="alert alert-danger" *ngIf="errorMessage" style="text-align: center; padding: 10px;">
+        {{errorMessage}}
+      </div>
     </div>
-    <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
-      {{message}}
+    <div class="offset-3 col-sm-6">
+      <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
+        {{message}}
+      </div>
     </div>
   </div>
 

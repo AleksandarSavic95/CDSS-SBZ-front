@@ -6,19 +6,9 @@ import { AddDoctorComponent } from '../admin/add-doctor/add-doctor.component';
 import { AddMedicineComponent } from '../admin/add-medicine/add-medicine.component';
 import { AddIngredientComponent } from '../admin/add-ingredient/add-ingredient.component';
 import { ViewIngredientsComponent } from '../shared/view-ingredients/view-ingredients.component';
-import { ViewMedicinesComponent } from '../shared/view-medicines/view-medicines.component';
 import { AddSicknessComponent } from '../admin/add-sickness/add-sickness.component';
-import { ViewSicknessesComponent } from '../shared/view-sicknesses/view-sicknesses.component';
 import { AddSymptomComponent } from '../admin/add-symptom/add-symptom.component';
 import { ViewSymptomsComponent } from '../shared/view-symptoms/view-symptoms.component';
-import { AddPatientComponent } from '../doctor/add-patient/add-patient.component';
-import { DiagnoseComponent } from '../doctor/diagnose/diagnose.component';
-import { BrowseDiseaseSymptomsComponent } from '../doctor/browse-disease-symptoms/browse-disease-symptoms.component';
-import { DiagnoseAllRelatedComponent } from '../doctor/diagnose-all-related/diagnose-all-related.component';
-import { DiagnoseMostProbableComponent } from '../doctor/diagnose-most-probable/diagnose-most-probable.component';
-import { TreatmentComponent } from '../doctor/treatment/treatment.component';
-import { IntensiveCareComponent } from '../doctor/intensive-care/intensive-care.component';
-import { ReportsComponent } from '../doctor/reports/reports.component';
 import { ProfileComponent } from '../account/profile/profile.component';
 
 

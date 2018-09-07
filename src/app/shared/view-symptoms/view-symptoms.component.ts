@@ -9,9 +9,6 @@ import { PrincipalService } from '../../auth/principal.service';
 })
 export class ViewSymptomsComponent implements OnInit {
 
-  searched = false;
-  searchCriteria = '';
-
   loading = false;
   isAdmin = false;
 
@@ -32,24 +29,11 @@ export class ViewSymptomsComponent implements OnInit {
     this.isAdmin = this.principalService.isAdmin();
   }
 
-
-  search() {
-    this.searched = true;
-    this.adminService.searchSymptoms(this.searchCriteria)
-      .subscribe(
-        resp => {
-          this.symptoms = resp;
-        },
-        err  => console.log(err)
-      );
-  }
-
   getSymptoms() {
-    this.searched = false;
     this.adminService.getSymptoms()
       .subscribe(
         resp => {
-          this.symptoms = resp;
+          this.symptoms = resp.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
         },
         err => {
           console.log(err);

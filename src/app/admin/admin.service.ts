@@ -14,18 +14,6 @@ export class AdminService {
     return Promise.reject(error);
   }
 
-
-  getIngredients(page: number, size: number) {
-    return this.http.get(`/api/ingredients/page?number=${page}&size=${size}`)
-      .pipe(
-        map(resp => {
-          console.log(resp);
-          return resp;
-        }),
-        catchError(this.handleError)
-      );
-  }
-
   addDoctor(doctorInfo) {
     return this.http.post('/api/register', doctorInfo)
       .pipe(map(resp => {
@@ -196,5 +184,63 @@ export class AdminService {
             }), catchError(this.handleError));
     }
 
+
+    // ##  Sicknesses  ##
+
+    getAllSicknesses() {
+        return this.http.get(`/api/sicknesses`)
+            .pipe(
+                map(resp => {
+                    console.log(resp);
+                    return resp;
+                }),
+                catchError(this.handleError)
+            );
+    }
+
+    getSicknesses(page: number, size: number) {
+        return this.http.get(`/api/sicknesses/page?number=${page}&size=${size}`)
+            .pipe(
+                map(resp => {
+                    console.log(resp);
+                    return resp;
+                }),
+                catchError(this.handleError)
+            );
+    }
+
+    searchSicknesses(searchCriteria, page, size) {
+        return this.http.get(`/api/sicknesses/find?text=${searchCriteria}&page=${page}&size=${size}`)
+            .pipe(
+                map(resp => {
+                    console.log(resp);
+                    return resp;
+                }),
+                catchError(this.handleError)
+            );
+    }
+
+    addSickness(info) {
+        return this.http.post('/api/sicknesses', info)
+            .pipe(map(resp => {
+                console.log(resp);
+            }), catchError(this.handleError));
+    }
+
+    editSickness(ID, editedSickness) {
+        return this.http.put(`/api/sicknesses/${ID}`, editedSickness)
+            .pipe(map(resp => {
+                console.log(resp);
+            }), catchError(this.handleError));
+    }
+
+    deleteSickness(id: string) {
+        console.log('deleting ' + id);
+        return this.http.delete(`/api/sicknesses/${id}`)
+            .pipe(map(resp => {
+                console.log(resp);
+                return resp as string;
+            }), catchError(this.handleError));
+    }
 
 }
