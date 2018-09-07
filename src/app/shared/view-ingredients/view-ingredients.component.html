@@ -44,10 +44,18 @@
         <tr *ngFor="let ingredient of ingredients">
           <td><span>{{ingredient.name}}</span></td>
           <td *ngIf="isAdmin">
-            <button (click)="reveal(ingredient)" class="btn btn-sm btn-primary"> Edit </button>
+            <div class="row">
+              <div class="offset-2 col-sm-8">
+                <button (click)="reveal(ingredient)" class="btn btn-sm btn-warning btn-block"> Edit </button>
+              </div>
+            </div>
           </td>
           <td *ngIf="isAdmin">
-            <button (click)="deleteIngredient(ingredient)" class="btn btn-sm btn-danger"> Remove </button>
+            <div class="row">
+              <div class="offset-2 col-sm-8">
+                <button (click)="deleteIngredient(ingredient)" class="btn btn-sm btn-danger btn-block"> Remove </button>
+              </div>
+            </div>
           </td>
         </tr>
         </tbody>

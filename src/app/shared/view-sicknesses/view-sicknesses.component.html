@@ -1,0 +1,108 @@
+<div class="container" id="main-container">
+
+  <h3 *ngIf="sicknesses?.length > 0 || searched" class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="col-lg-4 centered-text"><span class="color-opacity-radius" style="margin-top: 0;"> <b>Diseases:</b> Page {{page + 1}} / {{totalPages}}</span></span>
+      </div>
+      <span class="centered-text"><button *ngIf="page > 0" (click)="previousPage()" class="btn-default btn btn-md"> Previous page </button></span>
+      <span class="col-sm-1 centered-text"><button *ngIf="page == 0 || page < (totalPages - 1)" (click)="nextPage()" class="btn-default btn btn-md"> Next page </button></span>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-6 color-opacity-radius" id="id-search-form">
+        <form (ngSubmit)="search()" style="padding: 5px;">
+          <input type="text" [(ngModel)]="searchCriteria" class="form-control mr-sm-2" id="id-searchCriteria" name="searchCriteria" placeholder="Search criteria">
+          <button class="btn btn-primary btn-md" type="submit" [disabled]='searchCriteria == "" || searchCriteria == undefined' style="margin-top: 5px;">Search</button>
+          <button class="btn btn-primary btn-md" type="button" [disabled]=' ! searched' (click)="getSicknesses()" style="margin-top: 5px; float: right;">Browse diseases</button>
+        </form>
+      </div>
+    </div>
+  </h3>
+
+  <h3 *ngIf="searched && sicknesses?.length == 0 && !loading" class="container color-opacity-radius centered-text">Your search gave no results</h3>
+
+  <h3 *ngIf="errorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{errorMessage}}</h3>
+
+  <div *ngIf=" ! loading && ! sicknesses?.length == 0">
+    <div class="col-sm-offset-1 col-sm-10 color-opacity-radius">
+      <table class="table table-hover table-condensed sicknesses-table">
+        <thead>
+        <tr *ngIf="isAdmin">
+          <th style="border: none;">Disease name</th>
+          <th style="border: none; text-align: center;">&nbsp;Edit</th>
+          <th style="border: none; text-align: center;">&nbsp;Delete</th>
+        </tr>
+        <tr *ngIf=" ! isAdmin">
+          <div class="row">
+            <th class="col-sm-12" style="border: none;">Disease name</th>
+          </div>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let sickness of sicknesses">
+          <td><span>{{sickness.name}}</span></td>
+          <td *ngIf="isAdmin">
+            <button (click)="reveal(sickness)" class="btn btn-sm btn-warning btn-block"> Edit </button>
+          </td>
+          <td *ngIf="isAdmin">
+            <div class="row">
+              <div class="offset-1 col-sm-10">
+                <button (click)="deleteSickness(sickness)" class="btn btn-sm btn-danger btn-block"> Remove </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="container">
+    <div class="col-sm-offset-5 col-sm-4 loader"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="container">
+  <div class="modal" id="myModal" style="display: block; background: rgba(0,0,0, 0.5);" *ngIf="show">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">You are editing: {{modalSickness.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-6"> <h5>New disease name:</h5> </div>
+            <div class="col-sm-6"> <h5><input type="text" [(ngModel)]="newSickness.name" class="form-control form-control-sm"></h5> </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-sm-6">
+              <h5>Disease group: (currently {{sicknessGroups[modalSickness.sicknessGroup - 1]}})</h5>
+            </div>
+            <div class="col-sm-6">
+              <select id="group"
+                      [(ngModel)]="newSickness.sicknessGroup"
+                      class="form-control"
+                      placeholder="Sickness Group">
+                <option value="default-selected-value"></option>
+                <option *ngFor="let group of sicknessGroups, index as i" value="{{i + 1}}">{{group}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin: 5px; padding: 5px; border-radius: 5px;">
+          <div class="row">
+            <div class="offset-7 col-sm-2"> <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editSickness()"> Edit </button> </div>
+            <div class="col-sm-2"> <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()"> Close </button> </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

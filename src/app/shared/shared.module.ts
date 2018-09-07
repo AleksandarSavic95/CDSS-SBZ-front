@@ -8,6 +8,7 @@ import { ViewIngredientsComponent } from './view-ingredients/view-ingredients.co
 import { ViewSymptomsComponent } from './view-symptoms/view-symptoms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewMedicinesComponent } from './view-medicines/view-medicines.component';
+import { ViewSicknessesComponent } from './view-sicknesses/view-sicknesses.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { ViewMedicinesComponent } from './view-medicines/view-medicines.componen
     ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent, ViewMedicinesComponent],
+  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent, ViewMedicinesComponent, ViewSicknessesComponent],
   exports: [NavbarComponent]
 })
 export class SharedModule { }

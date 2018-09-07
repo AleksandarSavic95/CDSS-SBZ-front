@@ -30,8 +30,8 @@
         <tr *ngIf="isAdmin">
           <!--<div class="row">-->
           <th style="border: none;">Medication name</th>
-          <th style="border: none;">&nbsp;Edit</th>
-          <th style="border: none;">&nbsp;Delete</th>
+          <th style="border: none; text-align: center;">&nbsp;Edit</th>
+          <th style="border: none; text-align: center;">&nbsp;Delete</th>
           <!--</div>-->
         </tr>
         <tr *ngIf=" ! isAdmin">
@@ -44,10 +44,14 @@
         <tr *ngFor="let medicine of medicines">
           <td><span>{{medicine.name}}</span></td>
           <td *ngIf="isAdmin">
-            <button (click)="reveal(medicine)" class="btn btn-sm btn-primary"> Edit </button>
+            <button (click)="reveal(medicine)" class="btn btn-sm btn-warning btn-block"> Edit </button>
           </td>
           <td *ngIf="isAdmin">
-            <button (click)="deleteMedicine(medicine)" class="btn btn-sm btn-danger"> Remove </button>
+            <div class="row">
+              <div class="offset-2 col-sm-8">
+                <button (click)="deleteMedicine(medicine)" class="btn btn-sm btn-danger btn-block"> Remove </button>
+              </div>
+            </div>
           </td>
         </tr>
         </tbody>
@@ -130,7 +134,7 @@
 
         <div style="margin: 5px; padding: 5px; border-radius: 5px;">
           <div class="row">
-            <div class="offset-7 col-sm-2"> <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editMedicine()"> Edit </button> </div>
+            <div class="offset-7 col-sm-2"> <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="editMedicine()"> Save </button> </div>
             <div class="col-sm-2"> <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()"> Close </button> </div>
           </div>
         </div>
