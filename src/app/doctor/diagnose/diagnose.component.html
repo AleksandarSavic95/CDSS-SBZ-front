@@ -1,0 +1,83 @@
+<div class="container">
+
+  <div class="row">
+    <div class="offset-3 col-sm-6 centered-text">
+      <div class="alert alert-danger" *ngIf="errorMessage" style="padding: 10px;">
+        {{errorMessage}}
+      </div>
+      <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
+        {{message}}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!personalDiagnosing">
+
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="my-h1">Diagnose patient</span>
+      </div>
+      <div class="col-sm-3 mar-top-10">
+        <input type="text" name="sickness-name" class="form-control" [(ngModel)]="medicalCardNumber" placeholder="Patient's Medical Card Number">
+      </div>
+      <div class="col-sm-2 mar-top-10">
+        <button [disabled]="medicalCardNumber === ''" class="btn btn-lg btn-outline-info" (click)="getPatient()">Load patient</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+    </div>
+    <br>
+    <div *ngIf="patientSelected">
+      <h3 class="centered-text">Choose an option:</h3>
+      <div class="row">
+        <div class="col-sm-3 centered-text"><button class="btn btn-lg btn-outline-info" [routerLink]="['/diagnose-most-probable']">
+          Get most probable sickness</button></div>
+        <div class="col-sm-3 centered-text" style="padding-left: 25px;"><button class="btn btn-lg btn-outline-info" [routerLink]="['/diagnose-all-related']">
+          Get all related sicknesses</button></div>
+        <div class="col-sm-3 centered-text"><button class="btn btn-lg btn-outline-info" [routerLink]="['/browse-disease-symptoms']">
+          Browse disease symptoms</button></div>
+        <div class="col-sm-3 centered-text"><button class="btn btn-lg btn-outline-info" (click)="personalDiagnose()">
+          Make a personal diagnose</button></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="personalDiagnosing" class="row">
+
+    <div class="offset-2 col-sm-8">
+      <h2>Personally diagnosing sickness:</h2>
+      <div class="row">
+        <div class="col-sm-5">
+          <h4>Sicknesses:</h4>
+          <!-- Filter Field -->
+          <div style="margin-bottom: 10px;">
+            <input #sicknessesSearch id="sympt-search" (keyup)="filterSicknesses(sicknessesSearch.value)" class="form-control" placeholder="Filter"/>
+          </div>
+          <div class="scrollable-div">
+            <div *ngFor="let sickness of sicknesses">
+              <button class="btn btn-outline-primary btn-block"
+                      style="margin-bottom: 5px;" (click)="selectSickness(sickness)">
+                {{sickness.name}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <h4>Selected sickness:</h4>
+          <h4>{{selectedSickness?.name}}</h4>
+          <h5 *ngIf=" ! selectedSickness" style="text-align: right;">You will be able to give a treatment after you select one sickness.</h5>
+          <h4 *ngIf="selectedSickness">
+            <button class="btn btn-primary btn-lg" (click)="startTreatment()">Diagnose <i>{{selectedSickness.name}}</i></button>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -15,6 +15,7 @@ import { ViewSicknessesComponent } from '../shared/view-sicknesses/view-sickness
 import { AddPatientComponent } from '../doctor/add-patient/add-patient.component';
 import { ReportsComponent } from '../doctor/reports/reports.component';
 import { IntensiveCareComponent } from '../doctor/intensive-care/intensive-care.component';
+import { DiagnoseComponent } from '../doctor/diagnose/diagnose.component';
 
 
 const appRoutes: Routes = [
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
   { path: 'add-patient', component: AddPatientComponent },
 
   // Diagnose Components
-  // { path: 'diagnose-patient', component: DiagnoseComponent },
+  { path: 'diagnose-patient', component: DiagnoseComponent },
   // { path: 'diagnose-most-probable', component: DiagnoseMostProbableComponent },
   // { path: 'diagnose-all-related', component: DiagnoseAllRelatedComponent },
   // { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
