@@ -24,7 +24,7 @@
   <h3 *ngIf="errorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{errorMessage}}</h3>
 
   <div *ngIf=" ! loading && ! sicknesses?.length == 0">
-    <div class="col-sm-offset-1 col-sm-10 color-opacity-radius">
+    <div [class.col-sm-6]=" ! isAdmin" [class.col-sm-10]="isAdmin" class="col-sm-offset-1 color-opacity-radius">
       <table class="table table-hover table-condensed sicknesses-table">
         <thead>
         <tr *ngIf="isAdmin">
@@ -34,13 +34,19 @@
         </tr>
         <tr *ngIf=" ! isAdmin">
           <div class="row">
-            <th class="col-sm-12" style="border: none;">Disease name</th>
+            <th class="col-sm-12" style="border: none; text-align: center;">Disease name</th>
           </div>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let sickness of sicknesses">
-          <td><span>{{sickness.name}}</span></td>
+          <td>
+            <div class="row">
+              <div class="offset-3 col-sm-6" style="text-align: center;">
+                {{sickness.name}}
+              </div>
+            </div>
+          </td>
           <td *ngIf="isAdmin">
             <button (click)="reveal(sickness)" class="btn btn-sm btn-warning btn-block"> Edit </button>
           </td>
