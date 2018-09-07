@@ -1,0 +1,91 @@
+<div class="container" id="main-container">
+
+  <h3 *ngIf="symptoms?.length > 0 || searched && symptoms?.length == 0" class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <span class="col-lg-4 centered-text"><span class="color-opacity-radius" style="margin-top: 0;"> <b>Symptoms:</b></span></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-6 color-opacity-radius" id="id-search-form">
+        <form (ngSubmit)="search()" style="padding: 5px;">
+          <input type="text" [(ngModel)]="searchCriteria" class="form-control mr-sm-2" id="id-searchCriteria" name="searchCriteria" placeholder="Search criteria">
+          <button class="btn btn-primary btn-md" type="submit" [disabled]='searchCriteria == "" || searchCriteria == undefined' style="margin-top: 5px;">Search</button>
+          <button class="btn btn-primary btn-md" type="button" [disabled]=' ! searched' (click)="getSymptoms()" style="margin-top: 5px; float: right;">Browse symptoms</button>
+        </form>
+      </div>
+    </div>
+  </h3>
+
+  <h3 *ngIf="searched && symptoms?.length == 0 && !loading" class="container color-opacity-radius centered-text">Your search gave no results</h3>
+
+  <h3 *ngIf="errorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{errorMessage}}</h3>
+
+  <div *ngIf=" ! loading && ! symptoms?.length == 0">
+    <div class="col-sm-offset-1 col-sm-10 color-opacity-radius">
+      <table class="table table-hover table-condensed symptoms-table">
+        <thead>
+        <tr *ngIf="isAdmin">
+          <th style="border: none;">Symptom name</th>
+          <th style="border: none;"><i class="far fa-edit"></i>&nbsp;Edit</th>
+          <th style="border: none;"><i class="far fa-trash-alt"></i>&nbsp;Delete</th>
+        </tr>
+        <tr *ngIf=" ! isAdmin">
+          <div class="row">
+            <th class="col-sm-12" style="border: none;">Symptom name</th>
+          </div>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let symptom of symptoms">
+          <td><span>{{symptom.name}}</span></td>
+          <td *ngIf="isAdmin">
+            <button (click)="reveal(symptom)" class="btn btn-sm btn-primary"> <i class="far fa-edit"></i> Edit </button>
+          </td>
+          <td *ngIf="isAdmin">
+            <button (click)="deleteSymptom(symptom)" class="btn btn-sm btn-danger"> <i class="far fa-trash-alt"></i> Remove </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="container">
+    <div class="col-sm-offset-5 col-sm-4 loader"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="container">
+  <div class="modal" id="myModal" style="display: block; background: rgba(0,0,0, 0.5);" *ngIf="show">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">You are editing: {{modalSymptom.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-6"> <h5>New symptom name:</h5> </div>
+            <div class="col-sm-6"> <h5><input type="text" [(ngModel)]="newSymptom.name" class="form-control form-control-sm"></h5> </div>
+          </div>
+          <div class="row">
+            <div class="offset-1 col-sm-10 form-control"> <span>Renaming {{modalSymptom.name}} to {{newSymptom.name}}.</span> </div>
+          </div>
+        </div>
+
+        <div style="margin: 5px; padding: 5px; border-radius: 5px;">
+          <div class="row">
+            <div class="offset-7 col-sm-2"> <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editSymptom()"> Edit </button> </div>
+            <div class="col-sm-2"> <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()"> Close </button> </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

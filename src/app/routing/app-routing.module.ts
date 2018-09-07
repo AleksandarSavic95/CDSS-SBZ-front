@@ -44,10 +44,10 @@ const appRoutes: Routes = [
   // { path: 'treatment', component: TreatmentComponent },
 
   // View Components
-  // { path: 'ingredients', component: ViewIngredientsComponent },
+  { path: 'ingredients', component: ViewIngredientsComponent },
   // { path: 'medications', component: ViewMedicinesComponent },
   // { path: 'diseases', component: ViewSicknessesComponent },
-  // { path: 'symptoms', component: ViewSymptomsComponent },
+  { path: 'symptoms', component: ViewSymptomsComponent },
 
   // Intensive care
   // { path: 'intensive-care', component: IntensiveCareComponent },

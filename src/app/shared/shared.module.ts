@@ -4,16 +4,20 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AuthModule } from '../auth/auth.module';
-import { ColorByParameterDirective } from './directives/color-by-parameter.directive';
+import { ViewIngredientsComponent } from './view-ingredients/view-ingredients.component';
+import { ViewSymptomsComponent } from './view-symptoms/view-symptoms.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     AuthModule,
     CommonModule,
+    FormsModule,
     NgbModule,
+    ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [ColorByParameterDirective, NavbarComponent],
-  exports: [ColorByParameterDirective, NavbarComponent]
+  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent],
+  exports: [NavbarComponent]
 })
 export class SharedModule { }
