@@ -55,7 +55,7 @@
         <h4>Possible Diseases: <span style="font-size: 16px;">(diagnose one)</span></h4>
         <div  *ngIf=" ! possibleSicknesses">
           <h5>Sicknesses related to the selected symptoms will appear here once you load them</h5>
-          <button class="btn btn-lg btn-primary" (click)="getPossibleSicknesses ()">Load sicknesses</button>
+          <button *ngIf=" ! loading" class="btn btn-lg btn-primary" (click)="getPossibleSicknesses ()">Load sicknesses</button>
         </div>
 
         <h4 *ngIf="possibleSicknesses?.length == 0">There are no sicknesses related to your symptoms. :)</h4>
@@ -63,6 +63,10 @@
         <div *ngIf="possibleSicknesses" class="row">
           <div class="col-sm-7"><h5>Sickness name</h5></div>
           <div class="col-sm-5"><h5>Certainty (%)</h5></div>
+        </div>
+
+        <div *ngIf="loading" class="offset-2 col-sm-6">
+          <div class="loader"></div>
         </div>
 
         <div class="scrollable-div" style="height: 200px;">
@@ -80,6 +84,7 @@
         <h4 *ngIf="chosenSickness" style="text-align: right;">
           <button class="btn btn-primary btn-lg" (click)="startTreatment()">Diagnose <i>{{chosenSickness.name}}</i></button>
         </h4>
+
       </div>
 
     </div>

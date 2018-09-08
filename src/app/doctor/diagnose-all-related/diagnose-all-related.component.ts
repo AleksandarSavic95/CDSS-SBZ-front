@@ -26,6 +26,8 @@ export class DiagnoseAllRelatedComponent implements OnInit {
 
   chosenSickness = null;
 
+  loading = false;
+
   constructor(private doctorService: DoctorService,
               private adminService: AdminService,
               private router: Router) { }
@@ -37,6 +39,7 @@ export class DiagnoseAllRelatedComponent implements OnInit {
   }
 
   getPossibleSicknesses() {
+    this.loading = true;
     const patientInfo = {
       temperature: this.temperature,
       symptoms: this.selectedSymptoms
@@ -48,10 +51,12 @@ export class DiagnoseAllRelatedComponent implements OnInit {
           console.log(resp);
           this.possibleSicknesses = resp;
           this.message = `Received possible sicknesses successfully.`;
+          this.loading = false;
         },
         err  => {
           console.log(err);
           this.errorMessage = err.error ? err.error : err;
+          this.loading = false;
         }
       );
   }

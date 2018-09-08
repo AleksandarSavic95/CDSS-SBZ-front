@@ -8,6 +8,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { IntensiveCareComponent } from './intensive-care/intensive-care.component';
 import { DiagnoseComponent } from './diagnose/diagnose.component';
 import { DiagnoseAllRelatedComponent } from './diagnose-all-related/diagnose-all-related.component';
+import { TreatmentComponent } from './treatment/treatment.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,14 @@ import { DiagnoseAllRelatedComponent } from './diagnose-all-related/diagnose-all
     FormsModule,
     RouterModule
   ],
-  declarations: [AddPatientComponent, ReportsComponent, IntensiveCareComponent, DiagnoseComponent, DiagnoseAllRelatedComponent],
+  declarations: [
+    AddPatientComponent,
+    ReportsComponent,
+    IntensiveCareComponent,
+    DiagnoseComponent,
+    DiagnoseAllRelatedComponent,
+    TreatmentComponent
+  ],
   providers: [DoctorService]
 })
 export class DoctorModule { }

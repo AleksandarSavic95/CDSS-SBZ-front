@@ -1,0 +1,95 @@
+
+<div *ngIf=" ! sickness">
+  <div class="row">
+    <div class="col-sm-6 offset-4">
+      <h3> Patient and sickness not selected.</h3>
+      <h3><a [routerLink]="['/diagnose-patient']">Choose a patient to treat, first.</a></h3>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="sickness">
+  <div class="row">
+    <div class="col-sm-6 offset-4">
+      <h2>Selecting treatment for: {{sickness.name}}</h2>
+    </div>
+  </div>
+
+  <div class="row" style="text-align: center;">
+    <div class="offset-3 col-sm-6 centered-text">
+      <div class="alert alert-danger" *ngIf="errorMessage" style="padding: 10px;">
+        {{errorMessage}}
+      </div>
+      <div class="alert alert-success" *ngIf="message" style="padding: 10px;">
+        {{message}}
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <div class="row">
+      <div class="col-sm-3 offset-2">
+        <h4>Medications:</h4>
+        <div class="scrollable-div">
+          <div *ngFor="let medicine of medicines">
+            <button class="btn btn-outline-success btn-block" value="medicine" style="margin-bottom: 5px; cursor: cell;" (click)="addMedicine(medicine)">
+              {{medicine.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <h4>Selected medications:</h4>
+        <div class="scrollable-div">
+          <div *ngFor="let selectedMedicine of selectedMedicines">
+            <button class="btn btn-outline-success btn-block" value="selectedMedicine" style="margin-bottom: 5px; cursor: not-allowed;" (click)="removeMedicine(selectedMedicine)">
+              {{selectedMedicine.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <br>
+        <!-- white-space: unset; - to make button span multiple rows-->
+        <button class="btn btn-outline-primary btn-lg btn-block" style="margin-bottom: 5px; white-space: unset;" (click)="checkAllergies()">
+          Check medications for allergies
+        </button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-sm-3 offset-2">
+        <h5 *ngIf=" ! patientAllergies">Here will appear the medicationss that the patient is allergic to.</h5>
+        <h5 *ngIf="patientAllergies">Mediation allergies:</h5>
+        <div class="scrollable-div">
+          <div *ngFor="let allergenMedicine of patientAllergies?.medicine">
+            <button class="btn btn-warning btn-block" style="margin-bottom: 5px;" disabled>
+              {{allergenMedicine.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <h5 *ngIf=" ! patientAllergies">Here will appear the ingredients that the patient is allergic to.</h5>
+        <h5 *ngIf="patientAllergies">Ingredient allergies:</h5>
+        <div class="scrollable-div">
+          <div *ngFor="let allergenIngredient of patientAllergies?.ingredients">
+            <button class="btn btn-warning btn-block" style="margin-bottom: 5px;" disabled>
+              {{allergenIngredient.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <br>
+        <button class="btn btn-primary btn-lg btn-block" style="margin-bottom: 5px; white-space: unset;" (click)="startTreatment()">
+          Start the treatment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

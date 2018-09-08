@@ -17,6 +17,7 @@ import { ReportsComponent } from '../doctor/reports/reports.component';
 import { IntensiveCareComponent } from '../doctor/intensive-care/intensive-care.component';
 import { DiagnoseComponent } from '../doctor/diagnose/diagnose.component';
 import { DiagnoseAllRelatedComponent } from '../doctor/diagnose-all-related/diagnose-all-related.component';
+import { TreatmentComponent } from '../doctor/treatment/treatment.component';
 
 
 const appRoutes: Routes = [
@@ -38,7 +39,7 @@ const appRoutes: Routes = [
   // { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
 
   // Treatment
-  // { path: 'treatment', component: TreatmentComponent },
+  { path: 'treatment', component: TreatmentComponent },
 
   // View Components
   { path: 'ingredients', component: ViewIngredientsComponent },

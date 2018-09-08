@@ -1,0 +1,7 @@
+.scrollable-div {
+  height: 250px;
+  max-height: 300px;
+  overflow: auto;
+  overflow-x: hidden;
+  margin-bottom: 10px;
+}
