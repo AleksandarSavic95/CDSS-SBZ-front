@@ -1,0 +1,88 @@
+<div>
+  <h1 class="centered-text">Diagnose Patient</h1>
+
+  <div *ngIf=" ! patient">
+    <h4 class="centered-text">
+      <a [routerLink]="['/diagnose-patient']">Choose a patient</a>
+    </h4>
+  </div>
+
+  <div *ngIf="patient">
+
+    <div class="row">
+      <div class="col-sm-3">
+        <label for="temperature"> <h5>Temperature</h5> </label>
+        <input class="form-control" type="number" name="temperature" id="temperature" [(ngModel)]="temperature" step="0.5">
+      </div>
+      <div class="offset-1 col-sm-4">
+        <h4 class="centered-text">{{diagnoseDescription}}</h4>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+
+      <div class="col-sm-3">
+        <h4>Symptoms:</h4>
+        <!-- Filter Field -->
+        <div style="margin-bottom: 10px;">
+          <input #symptomsSearch id="sympt-search" (keyup)="filterSymptoms(symptomsSearch.value)" class="form-control" placeholder="Filter"/>
+        </div>
+        <div class="scrollable-div">
+          <div *ngFor="let symptom of symptoms">
+            <button class="btn btn-outline-info btn-block" value="symptom"
+                    style="margin-bottom: 5px; cursor: cell;" (click)="addSymptom(symptom)">
+              {{symptom.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <h4>Selected symptoms:</h4>
+        <div class="scrollable-div">
+          <div *ngFor="let symptom of selectedSymptoms">
+            <button class="btn btn-outline-warning btn-block" value="symptom"
+                    style="margin-bottom: 5px; cursor: not-allowed;" (click)="removeSymptom(symptom)">
+              {{symptom.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-5 offset-1">
+        <h4>Possible Diseases: <span style="font-size: 16px;">(diagnose one)</span></h4>
+        <div  *ngIf=" ! possibleSicknesses">
+          <h5>Sicknesses related to the selected symptoms will appear here once you load them</h5>
+          <button class="btn btn-lg btn-primary" (click)="getPossibleSicknesses ()">Load sicknesses</button>
+        </div>
+
+        <h4 *ngIf="possibleSicknesses?.length == 0">There are no sicknesses related to your symptoms. :)</h4>
+
+        <div *ngIf="possibleSicknesses" class="row">
+          <div class="col-sm-7"><h5>Sickness name</h5></div>
+          <div class="col-sm-5"><h5>Certainty (%)</h5></div>
+        </div>
+
+        <div class="scrollable-div" style="height: 200px;">
+          <div class="row" *ngFor="let sicknessItem of possibleSicknesses">
+            <div class="col-sm-7">
+              <button class="btn btn-outline-success btn-block" value="sicknessItem"
+                      style="margin-bottom: 5px;" (click)="chooseSickness(sicknessItem.sickness)">
+                {{sicknessItem.sickness.name}}
+              </button>
+            </div>
+            <div class="col-sm-5">{{sicknessItem.percentage}}</div>
+          </div>
+        </div>
+
+        <h4 *ngIf="chosenSickness" style="text-align: right;">
+          <button class="btn btn-primary btn-lg" (click)="startTreatment()">Diagnose <i>{{chosenSickness.name}}</i></button>
+        </h4>
+      </div>
+
+    </div>
+  </div>
+
+</div>

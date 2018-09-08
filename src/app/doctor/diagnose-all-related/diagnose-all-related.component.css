@@ -1,0 +1,33 @@
+h1 {
+  text-align: center;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.scrollable-div {
+  height: 300px;
+  max-height: 300px;
+  overflow: auto;
+  overflow-x: hidden;
+  margin-bottom: 10px;
+}
+
+.btn-outline-info.disabled, .btn-outline-info:disabled {
+  cursor: not-allowed;
+}
+
+.loader {
+  border: 24px solid #f3f3f3; /* Light grey */
+  border-top: 24px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

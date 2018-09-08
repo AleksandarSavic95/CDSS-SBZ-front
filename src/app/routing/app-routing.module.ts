@@ -16,6 +16,7 @@ import { AddPatientComponent } from '../doctor/add-patient/add-patient.component
 import { ReportsComponent } from '../doctor/reports/reports.component';
 import { IntensiveCareComponent } from '../doctor/intensive-care/intensive-care.component';
 import { DiagnoseComponent } from '../doctor/diagnose/diagnose.component';
+import { DiagnoseAllRelatedComponent } from '../doctor/diagnose-all-related/diagnose-all-related.component';
 
 
 const appRoutes: Routes = [
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
   // Diagnose Components
   { path: 'diagnose-patient', component: DiagnoseComponent },
   // { path: 'diagnose-most-probable', component: DiagnoseMostProbableComponent },
-  // { path: 'diagnose-all-related', component: DiagnoseAllRelatedComponent },
+  { path: 'diagnose-all-related', component: DiagnoseAllRelatedComponent },
   // { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
 
   // Treatment
