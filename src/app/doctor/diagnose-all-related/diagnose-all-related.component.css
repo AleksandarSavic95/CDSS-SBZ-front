@@ -1,3 +1,19 @@
+.my-h1 {
+  font-size: 2.218124rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.my-h2 {
+  font-size: 1.718124rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+}
+
+.mar-top-10 {
+  margin-top: 10px;
+}
+
 h1 {
   text-align: center;
 }

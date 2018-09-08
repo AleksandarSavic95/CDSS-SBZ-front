@@ -33,7 +33,7 @@
         <h4>Medications:</h4>
         <div class="scrollable-div">
           <div *ngFor="let medicine of medicines">
-            <button class="btn btn-outline-success btn-block" value="medicine" style="margin-bottom: 5px; cursor: cell;" (click)="addMedicine(medicine)">
+            <button class="btn btn-outline-success btn-block" value="medicine" style="margin-bottom: 5px;" (click)="addMedicine(medicine)">
               {{medicine.name}}
             </button>
           </div>
@@ -44,7 +44,7 @@
         <h4>Selected medications:</h4>
         <div class="scrollable-div">
           <div *ngFor="let selectedMedicine of selectedMedicines">
-            <button class="btn btn-outline-success btn-block" value="selectedMedicine" style="margin-bottom: 5px; cursor: not-allowed;" (click)="removeMedicine(selectedMedicine)">
+            <button class="btn btn-outline-success btn-block" value="selectedMedicine" style="margin-bottom: 5px;" (click)="removeMedicine(selectedMedicine)">
               {{selectedMedicine.name}}
             </button>
           </div>
@@ -71,6 +71,9 @@
               {{allergenMedicine.name}}
             </button>
           </div>
+          <div *ngIf="patientAllergies?.medicine?.length == 0">
+            <button class="btn btn-link btn-lg btn-block" style="margin-bottom: 5px;" disabled> No allergies :) </button>
+          </div>
         </div>
       </div>
       <div class="col-sm-3">
@@ -81,6 +84,9 @@
             <button class="btn btn-warning btn-block" style="margin-bottom: 5px;" disabled>
               {{allergenIngredient.name}}
             </button>
+          </div>
+          <div *ngIf="patientAllergies?.ingredients?.length == 0">
+            <button class="btn btn-link btn-lg btn-block" style="margin-bottom: 5px;" disabled> No allergies :) </button>
           </div>
         </div>
       </div>
