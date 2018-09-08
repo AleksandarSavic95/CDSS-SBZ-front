@@ -9,6 +9,8 @@ import { IntensiveCareComponent } from './intensive-care/intensive-care.componen
 import { DiagnoseComponent } from './diagnose/diagnose.component';
 import { DiagnoseAllRelatedComponent } from './diagnose-all-related/diagnose-all-related.component';
 import { TreatmentComponent } from './treatment/treatment.component';
+import { BrowseDiseaseSymptomsComponent } from './browse-disease-symptoms/browse-disease-symptoms.component';
+import { DiagnoseMostProbableComponent } from './diagnose-most-probable/diagnose-most-probable.component';
 
 @NgModule({
   imports: [
@@ -17,12 +19,14 @@ import { TreatmentComponent } from './treatment/treatment.component';
     RouterModule
   ],
   declarations: [
-    AddPatientComponent,
-    ReportsComponent,
-    IntensiveCareComponent,
-    DiagnoseComponent,
-    DiagnoseAllRelatedComponent,
-    TreatmentComponent
+      AddPatientComponent,
+      ReportsComponent,
+      IntensiveCareComponent,
+      DiagnoseComponent,
+      DiagnoseAllRelatedComponent,
+      TreatmentComponent,
+      BrowseDiseaseSymptomsComponent,
+      DiagnoseMostProbableComponent
   ],
   providers: [DoctorService]
 })

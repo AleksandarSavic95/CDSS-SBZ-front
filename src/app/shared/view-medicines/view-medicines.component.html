@@ -114,7 +114,7 @@
                 <div class="offset-2 col-sm-2" *ngIf="addedIngredientsPage >= 0 && addedIngredientsPage < (totalAddedIngredientsPages - 1)"> <button class="btn btn-sm" (click)="nextAddedIngredientsPage()">Next</button> </div>
               </div>
               <div *ngFor="let ingredient of pagedAddedIngredients">
-                <button class="btn btn-outline-danger btn-block" value="addedIngredient" (click)="removeIngredient(ingredient)" style="margin-bottom: 5px;cursor: not-allowed;">
+                <button class="btn btn-outline-danger btn-block" value="addedIngredient" (click)="removeIngredient(ingredient)" style="margin-bottom: 5px;">
                   {{ingredient.name}}
                 </button>
               </div>
@@ -131,7 +131,7 @@
                 <div class="offset-2 col-sm-2" *ngIf="newIngredientsPage == 0 || newIngredientsPage < (totalNewIngredientsPages - 1)"> <button class="btn btn-sm" (click)="nextNewIngredientsPage()">Next</button> </div>
               </div>
               <div *ngFor="let ingredient of newIngredients">
-                <button class="btn btn-outline-info btn-block" value="ingredient" (click)="addIngredient(ingredient)" style="margin-bottom: 5px; cursor: cell;">
+                <button class="btn btn-outline-info btn-block" value="ingredient" (click)="addIngredient(ingredient)" style="margin-bottom: 5px;">
                   {{ingredient.name}}
                 </button>
               </div>

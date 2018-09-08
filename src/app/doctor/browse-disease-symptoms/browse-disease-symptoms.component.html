@@ -1,0 +1,47 @@
+<h1>Browse sickness symptoms:</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <h4>Sicknesses:</h4>
+    <!-- Filter Field -->
+    <div style="margin-bottom: 10px;">
+      <input #sicknessesSearch id="sympt-search" (keyup)="filterSicknesses(sicknessesSearch.value)" class="form-control" placeholder="Filter"/>
+    </div>
+    <div class="scrollable-div">
+      <div *ngFor="let sickness of sicknesses">
+        <button class="btn btn-outline-primary btn-block"
+                style="margin-bottom: 5px;" (click)="selectSickness(sickness)">
+          {{sickness.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <h4>General symptoms:</h4>
+    <div class="scrollable-div">
+      <div *ngFor="let symptom of selectedSickness?.generalSymptoms">
+        <button disabled class="btn btn-outline-link btn-block" value="symptom"
+                style="margin-bottom: 5px;">
+          {{symptom.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <h4>Specific symptoms:</h4>
+    <div class="scrollable-div">
+      <div *ngFor="let symptom of selectedSickness?.specificSymptoms">
+        <button disabled class="btn btn-outline-link btn-block" value="symptom"
+                style="margin-bottom: 5px;">
+          {{symptom.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <h4>Selected sickness: {{selectedSickness?.name}}</h4>
+    <h5 *ngIf=" ! selectedSickness" style="text-align: right;">You will be able to give a treatment after you select one sickness.</h5>
+    <h4 *ngIf="selectedSickness" style="text-align: right;">
+      <button class="btn btn-primary btn-lg" (click)="startTreatment()">Diagnose <i>{{selectedSickness.name}}</i></button>
+    </h4>
+  </div>
+</div>

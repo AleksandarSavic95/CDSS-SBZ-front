@@ -69,7 +69,7 @@
               <input #ingredientsSearch id="ing-search" (keyup)="filterIngredients(ingredientsSearch.value)" class="form-control" placeholder="Filter"/>
             </div>
             <div *ngFor="let ingredient of ingredients" id="ingredients">
-              <button class="btn btn-outline-info btn-block" value="ingredient" (click)="addIngredient(ingredient)" style="margin-bottom: 5px; cursor: cell;">
+              <button class="btn btn-outline-info btn-block" value="ingredient" (click)="addIngredient(ingredient)" style="margin-bottom: 5px;">
                 {{ingredient.name}}
               </button>
             </div>
@@ -85,7 +85,7 @@
               <input #addedIngredientsSearch id="added-ing-search" (keyup)="filterAddedIngredients(addedIngredientsSearch.value)" class="form-control" placeholder="Filter"/>
             </div>
             <div *ngFor="let addedIngredient of addedIngredients" id="added-ingredients">
-              <button class="btn btn-outline-danger btn-block" value="addedIngredient" (click)="removeIngredient(addedIngredient)" style="margin-bottom: 5px;cursor: not-allowed;">{{addedIngredient.name}}</button>
+              <button class="btn btn-outline-danger btn-block" value="addedIngredient" (click)="removeIngredient(addedIngredient)" style="margin-bottom: 5px;">{{addedIngredient.name}}</button>
             </div>
           </div>
         </div>

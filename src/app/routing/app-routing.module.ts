@@ -18,6 +18,8 @@ import { IntensiveCareComponent } from '../doctor/intensive-care/intensive-care.
 import { DiagnoseComponent } from '../doctor/diagnose/diagnose.component';
 import { DiagnoseAllRelatedComponent } from '../doctor/diagnose-all-related/diagnose-all-related.component';
 import { TreatmentComponent } from '../doctor/treatment/treatment.component';
+import { BrowseDiseaseSymptomsComponent } from '../doctor/browse-disease-symptoms/browse-disease-symptoms.component';
+import { DiagnoseMostProbableComponent } from '../doctor/diagnose-most-probable/diagnose-most-probable.component';
 
 
 const appRoutes: Routes = [
@@ -34,9 +36,9 @@ const appRoutes: Routes = [
 
   // Diagnose Components
   { path: 'diagnose-patient', component: DiagnoseComponent },
-  // { path: 'diagnose-most-probable', component: DiagnoseMostProbableComponent },
+  { path: 'diagnose-most-probable', component: DiagnoseMostProbableComponent },
   { path: 'diagnose-all-related', component: DiagnoseAllRelatedComponent },
-  // { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
+  { path: 'browse-disease-symptoms', component: BrowseDiseaseSymptomsComponent },
 
   // Treatment
   { path: 'treatment', component: TreatmentComponent },

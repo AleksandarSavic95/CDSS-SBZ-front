@@ -1,0 +1,15 @@
+.centered-text {
+  text-align: center;
+}
+
+.scrollable-div {
+  height: 300px;
+  max-height: 300px;
+  overflow: auto;
+  overflow-x: hidden;
+  margin-bottom: 10px;
+}
+
+.btn {
+  overflow-x: auto;
+}

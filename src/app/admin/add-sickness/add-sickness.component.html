@@ -40,7 +40,7 @@
       <div class="form-group">
         <label for="added-general-symptoms" style="font-size: 20px; margin-bottom: 0px;">General symptoms:</label>
         <div *ngFor="let addedGeneralSymptom of addedGeneralSymptoms" id="added-general-symptoms">
-          <button class="btn btn-outline-danger btn-block" (click)="removeGeneralSymptom(addedGeneralSymptom)" style="margin-bottom: 5px;cursor: not-allowed; overflow: auto;">{{addedGeneralSymptom.name}}</button>
+          <button class="btn btn-outline-danger btn-block" (click)="removeGeneralSymptom(addedGeneralSymptom)" style="margin-bottom: 5px; overflow: auto;">{{addedGeneralSymptom.name}}</button>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
         </div>
         <div id="all-symptoms-div">
           <div *ngFor="let symptom of symptoms">
-            <button class="btn btn-outline-info btn-block" style="margin-bottom: 5px; cursor: default; overflow: auto;"
+            <button class="btn btn-outline-info btn-block" style="margin-bottom: 5px; overflow: auto;"
                 (click)="addSymptomToGeneral(symptom)" (contextmenu)="addSymptomToSpecific(symptom)">
               {{symptom.name}}
             </button>
@@ -71,7 +71,7 @@
       <div class="form-group">
         <label for="added-specific-symptoms" style="font-size: 20px; margin-bottom: 0px;">Specific symptoms:</label>
         <div *ngFor="let addedSpecificSymptom of addedSpecificSymptoms" id="added-specific-symptoms">
-          <button class="btn btn-outline-danger btn-block" (click)="removeSpecificSymptom(addedSpecificSymptom)" style="margin-bottom: 5px;cursor: not-allowed; overflow: auto;">{{addedSpecificSymptom.name}}</button>
+          <button class="btn btn-outline-danger btn-block" (click)="removeSpecificSymptom(addedSpecificSymptom)" style="margin-bottom: 5px;overflow: auto;">{{addedSpecificSymptom.name}}</button>
         </div>
       </div>
     </div>
