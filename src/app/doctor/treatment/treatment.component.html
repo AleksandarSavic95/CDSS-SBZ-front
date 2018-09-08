@@ -64,7 +64,7 @@
     <div class="row">
       <div class="col-sm-3 offset-2">
         <h5 *ngIf=" ! patientAllergies">Here will appear the medicationss that the patient is allergic to.</h5>
-        <h5 *ngIf="patientAllergies">Mediation allergies:</h5>
+        <h5 *ngIf="patientAllergies">Medication allergies:</h5>
         <div class="scrollable-div">
           <div *ngFor="let allergenMedicine of patientAllergies?.medicine">
             <button class="btn btn-warning btn-block" style="margin-bottom: 5px;" disabled>
