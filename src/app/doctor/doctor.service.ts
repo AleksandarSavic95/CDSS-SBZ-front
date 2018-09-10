@@ -64,7 +64,7 @@ export class DoctorService {
   }
 
   removeFromCare(id) {
-    return this.http.put(`/api/monitoring/patients/${id}`);
+    return this.http.put(`/api/monitoring/patients/${id}`, null);
   }
 
   // Sicknesses

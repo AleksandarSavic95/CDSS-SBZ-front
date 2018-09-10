@@ -1,6 +1,6 @@
 <div id="main-container">
 
-  <h1 class="centered-text">Intensive care</h1>
+  <h1 class="centered-text">Patients & Monitoring</h1>
 
   <h3 *ngIf="errorMessage !== ''" class="centered-text color-opacity-radius alert-danger">{{errorMessage}}</h3>
 
@@ -22,14 +22,14 @@
               <th style="border: none;">Card ID</th>
               <th style="border: none;">Full name</th>
               <th style="border: none;">&nbsp;Add</th>
-              <th style="border: none;">&nbsp;Delete</th>
+              <th style="border: none;">&nbsp;Remove from system</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let patient of patients">
               <td><span>{{patient.medicalCardNumber}}</span></td>
               <td><span>{{patient.name}}</span></td>
-              <td><button (click)="chooseSickness(patient)" class="btn btn-sm btn-success"> Intensive Care </button></td>
+              <td><button (click)="chooseSickness(patient)" class="btn btn-sm btn-success"> Start monitoring </button></td>
               <td><button (click)="deletePatient(patient)" class="btn btn-sm btn-danger"> Remove </button></td>
             </tr>
             </tbody>
@@ -38,16 +38,16 @@
       </div>
     </div>
 
-    <!-- Intensive care patients -->
+    <!-- Monitoring patients -->
     <div class="col-sm-12">
       <h3 *ngIf="intensiveCarePatients?.length > 0">
         <span class="centered-text">
-          <span class="color-opacity-radius" style="margin-top: 0;"> <b>On intensive care:</b> </span>
+          <span class="color-opacity-radius" style="margin-top: 0;"> <b>On monitoring:</b> </span>
         </span>
       </h3>
       <h3 *ngIf="intensiveCarePatients == undefined || intensiveCarePatients?.length == 0" class="container">
         <span class="centered-text">
-          <span class="color-opacity-radius" style="margin-top: 0;"> <b>No patients on intensive care.</b> </span>
+          <span class="color-opacity-radius" style="margin-top: 0;"> <b>No patients on monitoring.</b> </span>
         </span>
       </h3>
 
@@ -59,7 +59,7 @@
               <th style="border: none;">Card ID</th>
               <th style="border: none;">Full name</th>
               <th style="border: none;">Disease</th>
-              <th style="border: none;">&nbsp;Delete</th>
+              <th style="border: none;">&nbsp;Release from monitoring</th>
             </tr>
             </thead>
             <tbody>
@@ -67,7 +67,7 @@
               <td><span>{{intensiveCarePatient.patient?.medicalCardNumber}}</span></td>
               <td><span>{{intensiveCarePatient.patient?.name}}</span></td>
               <td><span>{{intensiveCarePatient.sickness?.name}}</span></td>
-              <td><button (click)="removeFromCare(intensiveCarePatient)" class="btn btn-sm btn-danger"> Remove </button></td>
+              <td><button (click)="removeFromCare(intensiveCarePatient)" class="btn btn-sm btn-danger"> Release </button></td>
             </tr>
             </tbody>
           </table>
@@ -91,7 +91,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">You are sending {{modalPatient.name}} to intensive care.</h5>
+          <h5 class="modal-title">You are sending {{modalPatient.name}} to monitoring.</h5>
           <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
         </div>
         <div class="modal-body">
@@ -102,7 +102,7 @@
           </div>
           <div class="row form-group">
             <div class="col-sm-6">
-              <h5>Sickness requiring intensive care:</h5>
+              <h5>Sickness requiring monitoring:</h5>
             </div>
             <div *ngIf="modalPatient.sickFrom.length > 0" class="col-sm-6">
               <select id="group"
@@ -114,7 +114,13 @@
               </select>
             </div>
             <div *ngIf="modalPatient.sickFrom.length == 0" class="col-sm-6">
-              <h5>This patient is not sick.</h5>
+              <select id="group"
+                      [(ngModel)]="chosenSicknessIndex"
+                      class="form-control"
+                      placeholder="Sickness Group">
+                <option value="default-selected-value"></option>
+                <option *ngFor="let sickness of allSicknesses, index as i" value="{{i}}">{{sickness.name}}</option>
+              </select>
             </div>
           </div>
         </div>

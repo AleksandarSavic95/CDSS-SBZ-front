@@ -49,7 +49,7 @@ const appRoutes: Routes = [
   { path: 'diseases', component: ViewSicknessesComponent },
   { path: 'symptoms', component: ViewSymptomsComponent },
 
-  // Intensive care
+  // Monitoring
   { path: 'intensive-care', component: IntensiveCareComponent },
 
   // Reports

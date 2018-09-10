@@ -23,11 +23,30 @@ export class IntensiveCareComponent implements OnInit {
 
   show = false;
 
-  constructor(private doctorService: DoctorService) { }
+  allSicknesses = [];
+
+  constructor(private doctorService: DoctorService, private adminService: AdminService) { }
 
   ngOnInit() {
     this.getPatients();
     this.getIntensiveCarePatients();
+    this.getSicknesses();
+  }
+
+  getSicknesses(): any {
+    this.adminService.getAllSicknesses()
+      .subscribe(
+        (resp: any) => {
+          this.allSicknesses = resp;
+          console.log(this.allSicknesses);
+          this.loading = false;
+        },
+        err => {
+          console.log(err);
+          this.errorMessage = err.error ? err.error : err;
+          this.loading = false;
+        }
+      );
   }
 
   getPatients() {
@@ -84,9 +103,13 @@ export class IntensiveCareComponent implements OnInit {
   }
 
   addToCare() {
+    let sicknessList = this.modalPatient.sickFrom;
+    if (sicknessList.length === 0) {
+      sicknessList = this.allSicknesses;
+    }
     const newPatient = {
       patient: this.modalPatient,
-      sickness: this.modalPatient.sickFrom[this.chosenSicknessIndex],
+      sickness: sicknessList[this.chosenSicknessIndex],
       oxygenLevel: {}
     };
     console.log(this.modalPatient.sickFrom[this.chosenSicknessIndex]);
@@ -98,7 +121,7 @@ export class IntensiveCareComponent implements OnInit {
             this.intensiveCarePatients.push(newPatient);
             this.hide();
           } else {
-            this.modalErrorMessage = 'Patient already on intensive care.';
+            this.modalErrorMessage = 'Patient already on monitoring.';
           }
         },
         err =>  {
@@ -109,7 +132,7 @@ export class IntensiveCareComponent implements OnInit {
   }
 
   removeFromCare(intensiveCarePatient) {
-    if (confirm(`You are removing ${intensiveCarePatient.patient.name} from intensive care.`)) {
+    if (confirm(`You are removing ${intensiveCarePatient.patient.name} from monitoring.`)) {
       this.intensiveCarePatients = this.intensiveCarePatients.filter(pat => pat.patient.name !== intensiveCarePatient.patient.name);
       this.doctorService.removeFromCare(intensiveCarePatient.patient.id)
         .subscribe(
