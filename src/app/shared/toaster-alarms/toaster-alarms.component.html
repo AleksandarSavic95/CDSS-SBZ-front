@@ -1,0 +1,15 @@
+<div>
+  <div class="toaster">
+    <div *ngFor="let message of messages; let i = index">
+      <div class="alert row"
+           [ngClass]="{'alert-info': message.level == 'info',
+                     'alert-danger': message.level == 'warning',
+                     'alert-success': message.level == 'success'}">
+
+        <div class="col-sm-3">{{message.date}}</div>
+        <div class="col-sm-8">{{message.content}}</div>
+        <div class="col-sm-1 delete-btn" (click)="dismiss(i)">&times;</div>
+      </div>
+    </div>
+  </div>
+</div>

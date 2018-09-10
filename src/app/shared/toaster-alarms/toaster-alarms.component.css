@@ -1,0 +1,25 @@
+.toaster {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 30%;
+  z-index: 3000;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.alert.row {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  line-height: 2em;
+  overflow-wrap: break-word;
+}
+
+.delete-btn {
+  cursor: pointer;
+  color: #696969;
+  font-size: 1.5em;
+  vertical-align: sub;
+}

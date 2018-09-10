@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewMedicinesComponent } from './view-medicines/view-medicines.component';
 import { ViewSicknessesComponent } from './view-sicknesses/view-sicknesses.component';
 
+import { ToasterAlarmsComponent } from './toaster-alarms/toaster-alarms.component';
+
 @NgModule({
   imports: [
     AuthModule,
@@ -19,7 +21,7 @@ import { ViewSicknessesComponent } from './view-sicknesses/view-sicknesses.compo
     ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent, ViewMedicinesComponent, ViewSicknessesComponent],
-  exports: [NavbarComponent]
+  declarations: [NavbarComponent, ViewIngredientsComponent, ViewSymptomsComponent, ViewMedicinesComponent, ViewSicknessesComponent, ToasterAlarmsComponent],
+  exports: [NavbarComponent, ToasterAlarmsComponent]
 })
 export class SharedModule { }

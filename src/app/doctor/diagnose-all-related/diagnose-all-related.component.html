@@ -27,6 +27,9 @@
       <div class="offset-1 col-sm-4">
         <h4 class="centered-text">{{diagnoseDescription}}</h4>
       </div>
+      <div class="offset-2 col-sm-4">
+        <button *ngIf=" ! loading" class="btn btn-lg btn-primary" (click)="getPossibleSicknesses ()">Load sicknesses</button>
+      </div>
     </div>
 
     <br>
@@ -62,10 +65,9 @@
       </div>
 
       <div class="col-sm-5 offset-1">
-        <h4>Possible Diseases: <span style="font-size: 16px;">(diagnose one)</span></h4>
+        <h4>Possible Diseases: <span style="font-size: 16px;">(Choose one to diagnose)</span></h4>
         <div  *ngIf=" ! possibleSicknesses">
           <h5>Sicknesses related to the selected symptoms will appear here once you load them</h5>
-          <button *ngIf=" ! loading" class="btn btn-lg btn-primary" (click)="getPossibleSicknesses ()">Load sicknesses</button>
         </div>
 
         <h4 *ngIf="possibleSicknesses?.length == 0">There are no sicknesses related to your symptoms. :)</h4>
