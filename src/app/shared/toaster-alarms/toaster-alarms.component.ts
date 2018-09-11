@@ -25,7 +25,7 @@ export class ToasterAlarmsComponent implements OnInit {
   private stompClient;
 
   messages: Message[] = [
-    {'date': '23:59:59', 'content': 'Notifications show up here', 'level': 'info'}
+    //{'date': '23:59:59', 'content': 'Notifications show up here', 'level': 'info'}
   ];
 
   constructor() {
